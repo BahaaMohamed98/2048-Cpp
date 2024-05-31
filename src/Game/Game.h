@@ -5,8 +5,8 @@
 #include <random>
 #include <conio.h>
 #include <iomanip>
-#include <vector>
 #include <thread>
+#include "MoveHandler/MoveHandler.h"
 
 using namespace std;
 
@@ -14,15 +14,17 @@ using namespace std;
 #define LEFT 75
 #define RIGHT 77
 #define DOWN 80
+#define ESC 27
 
 class Game {
 private:
 	vector<vector<int>> grid;
 	int charWidth;
 	int titleWidth;
-	int gridSize;
 public:
 	explicit Game(int dimension = 4);
+
+	static int getInput();
 
 	void logic();
 
@@ -30,19 +32,11 @@ public:
 
 	void printSeparator() const;
 
-	bool up();
-
-	bool down();
-
-	bool right();
-
-	bool left();
-
 	void addBlock(int max = 1);
 
 	bool checkGameOver();
 
-	void run();
+	void start();
 };
 
 #endif //INC_2048GAME_GAME_H

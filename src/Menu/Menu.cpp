@@ -3,7 +3,7 @@
 
 #include "Menu.h"
 
-Menu::Menu() : gg(4) {}
+Menu::Menu() : game(4) {}
 
 void Menu::display() {
 	cout << "\033[?25l";
@@ -13,9 +13,9 @@ void Menu::display() {
 }
 
 void Menu::getInput() {
-	switch (getch()) {
+	switch ((char) getch()) {
 		case '1':
-			gg.run();
+			game.start();
 			miniMenu();
 			break;
 		case '2':
@@ -48,7 +48,13 @@ void Menu::miniMenu() {
 
 void Menu::displayInstructions() {
 	system("cls");
-	cout << "play";
+	system("cls");
+	cout << "\t\tWelcome to the 2048 Game!\n\n"
+	     << "Instructions:\n\n"
+	     << "1. Use the arrow keys to move the tiles.\n"
+	     << "2. Tiles with the same number merge into one when they touch.\n"
+	     << "3. Your goal is to create a tile with the number 2048.\n"
+	     << "4. The game ends when there are no more possible moves.\n";
 	miniMenu();
 }
 

@@ -8,6 +8,8 @@ add_executable(main src/main.cpp
         src/Menu/menu.cpp
         src/Game/Game.h
         src/Game/Game.cpp
+        src/Game/MoveHandler/MoveHandler.cpp
+        src/Game/MoveHandler/MoveHandler.h
 )
 
 add_executable(test test/test.cpp)

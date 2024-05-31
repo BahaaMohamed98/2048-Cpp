@@ -5,7 +5,7 @@
 
 class Menu {
 private:
-	Game gg;
+	Game game;
 public:
 	Menu();
 

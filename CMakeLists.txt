@@ -10,6 +10,8 @@ add_executable(main src/main.cpp
         src/Game/Game.cpp
         src/Game/MoveHandler/MoveHandler.cpp
         src/Game/MoveHandler/MoveHandler.h
+        src/Main/Main.cpp
+        src/Main/Main.h
 )
 
 add_executable(test test/test.cpp)

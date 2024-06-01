@@ -23,7 +23,7 @@ void Menu::getInput() {
 		case '3':
 			exit(0);
 		default:
-			cout << "Invalid choice";
+			cout << "Invalid choice\n";
 			getInput();
 	}
 }

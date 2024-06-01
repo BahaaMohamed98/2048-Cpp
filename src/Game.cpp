@@ -5,13 +5,15 @@
 #include "headers/helpers.h"
 
 Game::Game() : charWidth(5), grid(4, vector<int>(4, 0)), WIN(false),
-               titleWidth((int) grid.size() * charWidth + (charWidth << 1) + 1) {
+               titleWidth((int) grid.size() * charWidth + (charWidth << 1) + 1), score(0), moveCounter(0) {
 	initialize();
 }
 
 void Game::initialize() {
 	grid = vector<vector<int>>(4, vector<int>(4, 0));
 	WIN = false;
+	score = 0;
+	moveCounter = 0;
 	for (int i = 0; i < 2; ++i)
 		addBlock(0);
 }
@@ -20,27 +22,31 @@ void Game::logic() {
 	while (!checkGameOver()) {
 		switch (getInput()) {
 			case Keycode::UP:
-				if (MoveHandler::moveUp(grid)) {
+				if (MoveHandler::moveUp(grid, score)) {
 					addBlock();
 					printBoard();
+					moveCounter++;
 				}
 				break;
 			case Keycode::RIGHT:
-				if (MoveHandler::moveRight(grid)) {
+				if (MoveHandler::moveRight(grid, score)) {
 					addBlock();
 					printBoard();
+					moveCounter++;
 				}
 				break;
 			case Keycode::LEFT:
-				if (MoveHandler::moveLeft(grid)) {
+				if (MoveHandler::moveLeft(grid, score)) {
 					addBlock();
 					printBoard();
+					moveCounter++;
 				}
 				break;
 			case Keycode::DOWN:
-				if (MoveHandler::moveDown(grid)) {
+				if (MoveHandler::moveDown(grid, score)) {
 					addBlock();
 					printBoard();
+					moveCounter++;
 				}
 				break;
 			case Keycode::ESC:
@@ -51,7 +57,8 @@ void Game::logic() {
 	}
 	clearScreen();
 	printBoard(false);
-	cout << setw(titleWidth) << (WIN ? "\r\nYou Win!\n" : "\nGame Over!\n");
+	cout << "\n\n";
+	cout << setw(titleWidth) << (WIN ? "You Win!\n" : "Game Over!\n");
 }
 
 void Game::printBoard(bool printMenu) const {
@@ -71,6 +78,8 @@ void Game::printBoard(bool printMenu) const {
 		cout << setw(charWidth) << '|' << "\n";
 		printSeparator();
 	}
+	cout << "\n" << setw((charWidth << 1) - 1) << ' ' << "Score: " << score
+	     << setw(charWidth << 2) << "moves: " << moveCounter;
 	if (printMenu)
 		cout << "\n\n[esc] Exit\n\n";
 }
@@ -120,7 +129,6 @@ void Game::start() {
 	printBoard();
 	logic();
 }
-
 
 #endif //INC_2048GAME_GAME_CPP
 

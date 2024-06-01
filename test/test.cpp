@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <iomanip>
 
 using namespace std;
 
@@ -21,8 +22,6 @@ std::string color(int value) {
 }
 
 int main() {
-	for (int i = 2; i <= 2048; i <<= 1) {
-		cout << color(i) << ' ' << i << "\033[0m\n";
-	}
+	cout<<setw(15)<<'x'<<'y';
 	getchar();
 }

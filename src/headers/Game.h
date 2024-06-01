@@ -15,6 +15,8 @@ private:
 	int charWidth;
 	int titleWidth;
 	bool WIN;
+	int score;
+	int moveCounter;
 public:
 	Game();
 

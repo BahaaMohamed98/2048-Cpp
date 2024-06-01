@@ -4,10 +4,16 @@
 #include "headers/Game.h"
 #include "headers/helpers.h"
 
-Game::Game() : charWidth(4), grid(4, vector<int>(4, 0)), WIN(false) {
+Game::Game() : charWidth(5), grid(4, vector<int>(4, 0)), WIN(false),
+               titleWidth((int) grid.size() * charWidth + (charWidth << 1) + 1) {
+	initialize();
+}
+
+void Game::initialize() {
+	grid = vector<vector<int>>(4, vector<int>(4, 0));
+	WIN = false;
 	for (int i = 0; i < 2; ++i)
 		addBlock(0);
-	titleWidth = ((int) grid.size() * charWidth) + (charWidth << 1) + 1;
 }
 
 void Game::logic() {
@@ -43,10 +49,12 @@ void Game::logic() {
 				cout << "Invalid\n";
 		}
 	}
-	cout << setw(titleWidth) << (WIN ? "\nYou Win!\n" : "\nGame Over!\n");
+	clearScreen();
+	printBoard(false);
+	cout << setw(titleWidth) << (WIN ? "\r\nYou Win!\n" : "\nGame Over!\n");
 }
 
-void Game::printBoard() const {
+void Game::printBoard(bool printMenu) const {
 	clearScreen();
 
 	cout << setw(titleWidth) << "2048 Game\n\n";
@@ -63,7 +71,8 @@ void Game::printBoard() const {
 		cout << setw(charWidth) << '|' << "\n";
 		printSeparator();
 	}
-	cout << "\n\n[esc] Exit\n\n";
+	if (printMenu)
+		cout << "\n\n[esc] Exit\n\n";
 }
 
 void Game::printSeparator() const {
@@ -90,23 +99,28 @@ void Game::addBlock(int max) {
 	grid[rowIndex][columnIndex] = 2 << dist6(rng);
 }
 
-bool Game::checkGameOver() { // Fixme
-	for (auto &array: grid)
-		for (auto &value: array) {
-			if (value == 0)
+bool Game::checkGameOver() {
+	for (int i = 0; i < (int) grid.size(); ++i) {
+		for (int j = 0; j < (int) grid.size(); ++j) {
+			if (grid[i][j] == 0 or
+			    (i < (int) grid.size() - 1 and grid[i][j] == grid[i + 1][j]) or
+			    (j < (int) grid.size() - 1 and grid[i][j] == grid[i][j + 1]))
 				return false;
-			else if (value == 2048) {
+			if (grid[i][j] == 2048) {
 				WIN = true;
-				return false;
+				return true;
 			}
 		}
+	}
 	return true;
 }
 
 void Game::start() {
+	initialize();
 	printBoard();
 	logic();
 }
+
 
 #endif //INC_2048GAME_GAME_CPP
 

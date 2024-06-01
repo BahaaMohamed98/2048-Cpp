@@ -18,9 +18,11 @@ private:
 public:
 	Game();
 
+	void initialize();
+
 	void logic();
 
-	void printBoard() const;
+	void printBoard(bool printMenu = true) const;
 
 	void printSeparator() const;
 

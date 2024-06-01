@@ -4,14 +4,10 @@ project(2048Game)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(main src/main.cpp
-        src/Menu/Menu.h
-        src/Menu/menu.cpp
-        src/Game/Game.h
-        src/Game/Game.cpp
-        src/Game/MoveHandler/MoveHandler.cpp
-        src/Game/MoveHandler/MoveHandler.h
-        src/Main/Main.cpp
-        src/Main/Main.h
+        src/Menu.cpp
+        src/Game.cpp
+        src/MoveHandler.cpp
+        src/helpers.cpp
 )
 
 add_executable(test test/test.cpp)

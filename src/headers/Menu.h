@@ -1,23 +1,19 @@
 #ifndef INC_2048GAME_MENU_H
 #define INC_2048GAME_MENU_H
 
-#include "../Game/Game.h"
+#include "Game.h"
 
 class Menu {
 private:
 	Game game;
 public:
-	Menu();
+	void printMenu();
 
-	void display();
-
-	void displayInstructions();
+	void PrintInstructions();
 
 	void getInput();
 
-//	void settings();
-
-	void miniMenu();
+	void printMiniMenu();
 };
 
 #endif //INC_2048GAME_MENU_H

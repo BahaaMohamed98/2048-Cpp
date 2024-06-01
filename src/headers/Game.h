@@ -1,34 +1,26 @@
 #ifndef INC_2048GAME_GAME_H
 #define INC_2048GAME_GAME_H
 
-#include <iostream>
 #include <random>
-#include <conio.h>
 #include <iomanip>
 #include <thread>
-#include "MoveHandler/MoveHandler.h"
+#include "../headers/helpers.h"
+#include "MoveHandler.h"
 
 using namespace std;
-
-#define UP 72
-#define LEFT 75
-#define RIGHT 77
-#define DOWN 80
-#define ESC 27
 
 class Game {
 private:
 	vector<vector<int>> grid;
 	int charWidth;
 	int titleWidth;
+	bool WIN;
 public:
-	explicit Game(int dimension = 4);
-
-	static int getInput();
+	Game();
 
 	void logic();
 
-	void display() const;
+	void printBoard() const;
 
 	void printSeparator() const;
 

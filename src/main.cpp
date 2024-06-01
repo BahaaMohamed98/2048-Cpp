@@ -1,6 +1,6 @@
-#include "Menu/Menu.h"
+#include "headers/Menu.h"
 
 int main() {
 	Menu menu;
-	menu.display();
+	menu.printMenu();
 }

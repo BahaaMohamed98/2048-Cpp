@@ -1,65 +1,65 @@
 #ifndef INC_2048GAME_GAME_CPP
 #define INC_2048GAME_GAME_CPP
 
-#include "Game.h"
+#include "headers/Game.h"
+#include "headers/helpers.h"
 
-Game::Game(int dimension) : charWidth(5), grid(dimension, vector<int>(dimension, 0)) {
+Game::Game() : charWidth(4), grid(4, vector<int>(4, 0)), WIN(false) {
 	for (int i = 0; i < 2; ++i)
 		addBlock(0);
 	titleWidth = ((int) grid.size() * charWidth) + (charWidth << 1) + 1;
 }
 
-int Game::getInput() {
-	if (int input = (int) getch();(input != 224))
-		return input;
-	return getch();
-}
-
 void Game::logic() {
 	while (!checkGameOver()) {
 		switch (getInput()) {
-			case UP:
+			case Keycode::UP:
 				if (MoveHandler::moveUp(grid)) {
 					addBlock();
-					display();
+					printBoard();
 				}
 				break;
-			case RIGHT:
+			case Keycode::RIGHT:
 				if (MoveHandler::moveRight(grid)) {
 					addBlock();
-					display();
+					printBoard();
 				}
 				break;
-			case LEFT:
+			case Keycode::LEFT:
 				if (MoveHandler::moveLeft(grid)) {
 					addBlock();
-					display();
+					printBoard();
 				}
 				break;
-			case DOWN:
+			case Keycode::DOWN:
 				if (MoveHandler::moveDown(grid)) {
 					addBlock();
-					display();
+					printBoard();
 				}
 				break;
-			case ESC:
+			case Keycode::ESC:
 				exit(0);
 			default:
 				cout << "Invalid\n";
 		}
 	}
-	cout << setw(titleWidth) << "\nGame Over!\n";
+	cout << setw(titleWidth) << (WIN ? "\nYou Win!\n" : "\nGame Over!\n");
 }
 
-void Game::display() const {
-	system("cls");
+void Game::printBoard() const {
+	clearScreen();
 
 	cout << setw(titleWidth) << "2048 Game\n\n";
 
 	printSeparator();
 	for (auto &array: grid) {
-		for (auto &value: array)
-			cout << setw(charWidth) << '|' << setw(charWidth) << value;
+		for (auto &value: array) {
+			cout << setw(charWidth) << '|';
+			if (value != 0)
+				cout << color(value) << setw(charWidth) << value << normal;
+			else
+				cout << setw(charWidth) << ' ';
+		}
 		cout << setw(charWidth) << '|' << "\n";
 		printSeparator();
 	}
@@ -90,17 +90,21 @@ void Game::addBlock(int max) {
 	grid[rowIndex][columnIndex] = 2 << dist6(rng);
 }
 
-bool Game::checkGameOver() {
+bool Game::checkGameOver() { // Fixme
 	for (auto &array: grid)
 		for (auto &value: array) {
 			if (value == 0)
 				return false;
+			else if (value == 2048) {
+				WIN = true;
+				return false;
+			}
 		}
 	return true;
 }
 
 void Game::start() {
-	display();
+	printBoard();
 	logic();
 }
 

@@ -14,8 +14,6 @@ void Game::initialize() {
 	moveCounter = 0;
 	for (int i = 0; i < 2; ++i)
 		addBlock(0);
-	grid[0][0] = 1024;
-	grid[0][1] = 1024;
 }
 
 void Game::logic() {

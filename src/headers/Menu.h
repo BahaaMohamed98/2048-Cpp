@@ -13,7 +13,7 @@ public:
 
 	void getInput();
 
-	void printMiniMenu();
+	void miniMenu();
 };
 
 #endif //INC_2048GAME_MENU_H

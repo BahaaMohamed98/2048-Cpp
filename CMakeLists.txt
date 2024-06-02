@@ -8,6 +8,8 @@ add_executable(main src/main.cpp
         src/Game.cpp
         src/MoveHandler.cpp
         src/helpers.cpp
+        src/Time.cpp
+        src/headers/Time.h
 )
 
 add_executable(test test/test.cpp)

@@ -2,11 +2,9 @@
 #define INC_2048GAME_GAME_CPP
 
 #include "headers/Game.h"
-#include "headers/helpers.h"
 
-Game::Game() : charWidth(5), grid(4, vector<int>(4, 0)), WIN(false),
+Game::Game() : charWidth(4), grid(4, vector<int>(4, 0)), WIN(false),
                titleWidth((int) grid.size() * charWidth + (charWidth << 1) + 1), score(0), moveCounter(0) {
-	initialize();
 }
 
 void Game::initialize() {
@@ -16,52 +14,63 @@ void Game::initialize() {
 	moveCounter = 0;
 	for (int i = 0; i < 2; ++i)
 		addBlock(0);
+	grid[0][0] = 1024;
+	grid[0][1] = 1024;
 }
 
 void Game::logic() {
+	bool firstInvalid = true;
 	while (!checkGameOver()) {
 		switch (getInput()) {
 			case Keycode::UP:
 				if (MoveHandler::moveUp(grid, score)) {
 					addBlock();
-					printBoard();
 					moveCounter++;
+					printBoard();
 				}
+				firstInvalid = true;
 				break;
 			case Keycode::RIGHT:
 				if (MoveHandler::moveRight(grid, score)) {
 					addBlock();
-					printBoard();
 					moveCounter++;
+					printBoard();
 				}
+				firstInvalid = true;
 				break;
 			case Keycode::LEFT:
 				if (MoveHandler::moveLeft(grid, score)) {
 					addBlock();
-					printBoard();
 					moveCounter++;
+					printBoard();
 				}
+				firstInvalid = true;
 				break;
 			case Keycode::DOWN:
 				if (MoveHandler::moveDown(grid, score)) {
 					addBlock();
-					printBoard();
 					moveCounter++;
+					printBoard();
 				}
+				firstInvalid = true;
 				break;
 			case Keycode::ESC:
 				exit(0);
 			default:
-				cout << "Invalid\n";
+				if (firstInvalid)
+					cout << "Invalid\n";
+				firstInvalid = false;
 		}
 	}
+	time.end();
 	clearScreen();
 	printBoard(false);
 	cout << "\n\n";
-	cout << setw(titleWidth) << (WIN ? "You Win!\n" : "Game Over!\n");
+	cout << setw(titleWidth) << (WIN ? "You Win!\n\n" : "Game Over!\n\n");
+	time.printTime(charWidth);
 }
 
-void Game::printBoard(bool printMenu) const {
+void Game::printBoard(bool printMenu) {
 	clearScreen();
 
 	cout << setw(titleWidth) << "2048 Game\n\n";
@@ -109,16 +118,20 @@ void Game::addBlock(int max) {
 }
 
 bool Game::checkGameOver() {
+	for (const auto &array: grid) {
+		for (const auto &value: array) {
+			if (value == 2048) {
+				WIN = true;
+				return true;
+			}
+		}
+	}
 	for (int i = 0; i < (int) grid.size(); ++i) {
 		for (int j = 0; j < (int) grid.size(); ++j) {
 			if (grid[i][j] == 0 or
 			    (i < (int) grid.size() - 1 and grid[i][j] == grid[i + 1][j]) or
 			    (j < (int) grid.size() - 1 and grid[i][j] == grid[i][j + 1]))
 				return false;
-			if (grid[i][j] == 2048) {
-				WIN = true;
-				return true;
-			}
 		}
 	}
 	return true;
@@ -127,6 +140,7 @@ bool Game::checkGameOver() {
 void Game::start() {
 	initialize();
 	printBoard();
+	time.start();
 	logic();
 }
 

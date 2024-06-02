@@ -2,10 +2,10 @@
 #define INC_2048GAME_GAME_H
 
 #include <random>
-#include <iomanip>
 #include <thread>
 #include "../headers/helpers.h"
 #include "MoveHandler.h"
+#include "Time.h"
 
 using namespace std;
 
@@ -17,6 +17,7 @@ private:
 	bool WIN;
 	int score;
 	int moveCounter;
+	Time time;
 public:
 	Game();
 
@@ -24,7 +25,7 @@ public:
 
 	void logic();
 
-	void printBoard(bool printMenu = true) const;
+	void printBoard(bool printMenu = true);
 
 	void printSeparator() const;
 

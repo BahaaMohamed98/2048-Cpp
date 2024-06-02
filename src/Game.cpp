@@ -4,8 +4,7 @@
 #include "headers/Game.h"
 
 Game::Game() : charWidth(4), grid(4, vector<int>(4, 0)), WIN(false),
-               titleWidth((int) grid.size() * charWidth + (charWidth << 1) + 1), score(0), moveCounter(0) {
-}
+               titleWidth((int) grid.size() * charWidth + (charWidth << 1) + 1), score(0), moveCounter(0) {}
 
 void Game::initialize() {
 	grid = vector<vector<int>>(4, vector<int>(4, 0));
@@ -109,9 +108,11 @@ void Game::addBlock(int max) {
 	std::uniform_int_distribution<std::mt19937::result_type> dist6(0, max);
 	std::uniform_int_distribution<std::mt19937::result_type> dist7(0, (int) grid.size() - 1);
 
-	int rowIndex = 0, columnIndex = 0;
-	while (grid[rowIndex][columnIndex] != 0)
+	int rowIndex, columnIndex;
+	do {
 		rowIndex = (int) dist7(rng), columnIndex = (int) dist7(rng);
+	} while (grid[rowIndex][columnIndex] != 0);
+
 	grid[rowIndex][columnIndex] = 2 << dist6(rng);
 }
 

@@ -18,7 +18,7 @@ Welcome to the 2048 Game in C++! This project is a console-based version of the 
 ## How to Play
 
 1. *Start the Game*:
-   
+
    Run the executable or compile the source code and execute the program.
 2. *Controls*:
    - Use arrow keys to move the tiles up, down, left, or right.
@@ -26,20 +26,34 @@ Welcome to the 2048 Game in C++! This project is a console-based version of the 
    - Try to reach the 2048 tile!
 
 3. *Game Over*:
-   
+
    The game ends when no more moves are possible.
 
 ## Installation
 
 *Clone the Repository*:
-   
-   `git clone https://github.com/BahaaMohamed98/Console-2048-Game`
-   
-Compile the Source Code: using `CMake`
 
-or
+```bash
+git clone https://github.com/BahaaMohamed98/Console-2048-Game
+```
 
-Run the `main.exe` file in the `Build` folder
+Compile the Source Code:
+
+```bash
+g++ .\main.cpp .\Game.cpp .\GameTime.cpp .\helpers.cpp .\Menu.cpp .\MoveHandler.cpp -o 2048 -static -static-libstdc++ -static-libgcc -I src/headers`
+```
+
+Run the executable:
+
+```bash
+.\2048
+```
+
+
+OR run the `2048.exe` file in the `Build` directory directly using:
+```bash
+.\Build\2048.exe
+```
 
 ## Project Structure
 

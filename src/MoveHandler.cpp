@@ -1,7 +1,7 @@
 #ifndef INC_2048GAME_MOVEHANDLER_CPP
 #define INC_2048GAME_MOVEHANDLER_CPP
 
-#include "headers/MoveHandler.h"
+#include "MoveHandler.h"
 
 bool MoveHandler::moveUp(vector<vector<int>> &grid, int &score) {
 	int gridSize = (int) grid.size();

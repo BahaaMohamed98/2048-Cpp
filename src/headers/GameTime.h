@@ -1,11 +1,11 @@
-#ifndef INC_2048GAME_TIME_H
-#define INC_2048GAME_TIME_H
+#ifndef INC_2048GAME_GAMETIME_H
+#define INC_2048GAME_GAMETIME_H
 
 #include <chrono>
 #include <iomanip>
 #include <iostream>
 
-class Time {
+class GameTime {
 private:
 	std::chrono::steady_clock::time_point startTime, endTime;
 	std::chrono::seconds duration;
@@ -21,4 +21,4 @@ public:
 	void printTime(const int &charWidth);
 };
 
-#endif //INC_2048GAME_TIME_H
+#endif //INC_2048GAME_GAMETIME_H

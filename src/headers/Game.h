@@ -3,9 +3,9 @@
 
 #include <random>
 #include <thread>
-#include "../headers/helpers.h"
+#include "helpers.h"
 #include "MoveHandler.h"
-#include "Time.h"
+#include "GameTime.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ private:
 	bool WIN;
 	int score;
 	int moveCounter;
-	Time time;
+	GameTime time;
 public:
 	Game();
 

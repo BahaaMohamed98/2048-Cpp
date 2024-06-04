@@ -1,25 +1,25 @@
-#include "headers/Time.h"
+#include "GameTime.h"
 
 using namespace std;
 
-void Time::start() {
+void GameTime::start() {
 	startTime = std::chrono::steady_clock::now();
 }
 
-void Time::end() {
+void GameTime::end() {
 	endTime = std::chrono::steady_clock::now();
 	duration = std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime);
 }
 
-int Time::getMinutes() {
+int GameTime::getMinutes() {
 	return static_cast<int>(duration.count() / 60);
 }
 
-double Time::getSeconds() {
+double GameTime::getSeconds() {
 	return static_cast<double>(duration.count() % 60);
 }
 
-void Time::printTime(const int &charWidth) {
+void GameTime::printTime(const int &charWidth) {
 	int minVal = ((int) getMinutes()), secVal = (int) getSeconds();
 	string minutes, seconds;
 

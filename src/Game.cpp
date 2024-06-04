@@ -1,7 +1,7 @@
 #ifndef INC_2048GAME_GAME_CPP
 #define INC_2048GAME_GAME_CPP
 
-#include "headers/Game.h"
+#include "Game.h"
 
 Game::Game() : charWidth(4), grid(4, vector<int>(4, 0)), WIN(false),
                titleWidth((int) grid.size() * charWidth + (charWidth << 1) + 1), score(0), moveCounter(0) {}

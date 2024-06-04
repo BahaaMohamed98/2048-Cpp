@@ -1,8 +1,8 @@
 #ifndef INC_2048GAME_MENU_CPP
 #define INC_2048GAME_MENU_CPP
 
-#include "headers/Menu.h"
-#include "headers/helpers.h"
+#include "Menu.h"
+#include "helpers.h"
 
 void Menu::printMenu() {
 	cout << cur_off;

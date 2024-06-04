@@ -19,4 +19,12 @@ target_compile_options(2048 PRIVATE -static)
 
 target_include_directories(2048 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/headers/)
 
-add_executable(test test/test.cpp)
+add_executable(test test/test.cpp
+        src/Menu.cpp
+        src/Game.cpp
+        src/MoveHandler.cpp
+        src/helpers.cpp
+        src/GameTime.cpp
+)
+
+target_include_directories(test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/headers/)

@@ -37,7 +37,7 @@ void clearScreen() {
 #endif
 }
 
-int getInput() {
+int getKeyboardInput() {
 	if (int input = getCharInput();(input != 224))
 		return input;
 	return getCharInput();

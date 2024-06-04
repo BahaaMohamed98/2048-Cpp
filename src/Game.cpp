@@ -18,45 +18,19 @@ void Game::initialize() {
 void Game::logic() {
 	bool firstInvalid = true;
 	while (!checkGameOver()) {
-		switch (getInput()) {
-			case Keycode::UP:
-				if (MoveHandler::moveUp(grid, score)) {
-					addBlock();
-					moveCounter++;
-					printBoard();
-				}
-				firstInvalid = true;
-				break;
-			case Keycode::RIGHT:
-				if (MoveHandler::moveRight(grid, score)) {
-					addBlock();
-					moveCounter++;
-					printBoard();
-				}
-				firstInvalid = true;
-				break;
-			case Keycode::LEFT:
-				if (MoveHandler::moveLeft(grid, score)) {
-					addBlock();
-					moveCounter++;
-					printBoard();
-				}
-				firstInvalid = true;
-				break;
-			case Keycode::DOWN:
-				if (MoveHandler::moveDown(grid, score)) {
-					addBlock();
-					moveCounter++;
-					printBoard();
-				}
-				firstInvalid = true;
-				break;
-			case Keycode::ESC:
-				exit(0);
-			default:
-				if (firstInvalid)
-					cout << "Invalid\n";
-				firstInvalid = false;
+		int input = getKeyboardInput();
+
+		if (input == Keycode::ESC)
+			exit(0);
+
+		if (int result = MoveHandler::move(*this, input);result == true) {
+			addBlock();
+			moveCounter++;
+			printBoard();
+			firstInvalid = true;
+		} else if (result == INVALID_INPUT and firstInvalid) {
+			cout << "Invalid\n";
+			firstInvalid = false;
 		}
 	}
 	time.end();

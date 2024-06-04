@@ -34,6 +34,8 @@ public:
 	bool checkGameOver();
 
 	void start();
+
+	friend class MoveHandler;
 };
 
 #endif //INC_2048GAME_GAME_H

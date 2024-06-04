@@ -9,6 +9,7 @@
 #define normal "\033[0m"
 
 enum Keycode {
+	INVALID_INPUT = -1,
 	ESC = 27,
 	UP = 72,
 	LEFT = 75,
@@ -20,8 +21,8 @@ void clearScreen();
 
 int getCharInput();
 
-int getInput();
+int getKeyboardInput();
 
-std::string color(int value) ;
+std::string color(int value);
 
 #endif //INC_2048GAME_HELPERS_H

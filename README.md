@@ -31,36 +31,28 @@ Welcome to the 2048 Game in C++! This project is a console-based version of the 
 
 ## Installation
 
-*Clone the Repository*:
+Clone the Repository:
 
 ```bash
 git clone https://github.com/BahaaMohamed98/Console-2048-Game
+cd Console-2048-Game
 ```
 
 Compile the Source Code:
 
 ```bash
-g++ .\main.cpp .\Game.cpp .\GameTime.cpp .\helpers.cpp .\Menu.cpp .\MoveHandler.cpp -o 2048 -static -static-libstdc++ -static-libgcc -I src/headers`
+cd src
+g++ main.cpp Game.cpp GameTime.cpp helpers.cpp Menu.cpp MoveHandler.cpp -o 2048 -I headers/
 ```
 
 Run the executable:
 
 ```bash
-.\2048
+./2048
 ```
 
 
 OR run the `2048.exe` file in the `Build` directory directly using:
 ```bash
-.\Build\2048.exe
+./Build/2048
 ```
-
-## Project Structure
-
-main.cpp: Entry point of the game.
-
-- `Game.h`: Contains the game logic and rendering.
-
-- `Menu.h`: Handles the main menu and user inputs.
-
-- `MoveHandler.h`: Manages the movement logic.

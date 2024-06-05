@@ -12,33 +12,43 @@ void Game::initialize() {
 	score = 0;
 	moveCounter = 0;
 	for (int i = 0; i < 2; ++i)
-		addBlock(0);
+		addTile(0);
 }
 
 void Game::logic() {
 	bool firstInvalid = true;
-	while (!checkGameOver()) {
+	while (true) {
+
 		int input = getKeyboardInput();
 
 		if (input == Keycode::ESC)
 			exit(0);
 
-		if (int result = MoveHandler::move(*this, input);result == true) {
-			addBlock();
-			moveCounter++;
+		try {
+			bool moved;
+			if (moved = MoveHandler::move(*this, input);moved)
+				moveCounter++;
+
+			if (checkGameOver())
+				break;
+			if (!moved)
+				continue;
+
+			addTile();
 			printBoard();
 			firstInvalid = true;
-		} else if (result == INVALID_INPUT and firstInvalid) {
+		} catch (const std::exception &exception) {
+			if (!firstInvalid)
+				continue;
 			cout << "Invalid\n";
 			firstInvalid = false;
 		}
 	}
-	time.end();
-	clearScreen();
+	gameTime.stop();
 	printBoard(false);
 	cout << "\n\n";
 	cout << setw(titleWidth) << (WIN ? "You Win!\n\n" : "Game Over!\n\n");
-	time.printTime(charWidth);
+	gameTime.printTime(charWidth);
 }
 
 void Game::printBoard(bool printMenu) {
@@ -59,7 +69,7 @@ void Game::printBoard(bool printMenu) {
 		printSeparator();
 	}
 	cout << "\n" << setw((charWidth << 1) - 1) << ' ' << "Score: " << score
-	     << setw(charWidth << 2) << "moves: " << moveCounter;
+	     << setw((charWidth << 2) - 1) << "moves: " << moveCounter;
 	if (printMenu)
 		cout << "\n\n[esc] Exit\n\n";
 }
@@ -76,7 +86,7 @@ void Game::printSeparator() const {
 	cout << "+\n";
 }
 
-void Game::addBlock(int max) {
+void Game::addTile(int max) {
 	std::random_device dev;
 	std::mt19937 rng(dev());
 	std::uniform_int_distribution<std::mt19937::result_type> dist6(0, max);
@@ -110,10 +120,10 @@ bool Game::checkGameOver() {
 	return true;
 }
 
-void Game::start() {
+void Game::run() {
 	initialize();
 	printBoard();
-	time.start();
+	gameTime.start();
 	logic();
 }
 

@@ -12,7 +12,7 @@ private:
 public:
 	void start();
 
-	void end();
+	void stop();
 
 	int getMinutes();
 

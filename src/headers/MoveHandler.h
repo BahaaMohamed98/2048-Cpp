@@ -17,7 +17,7 @@ private:
 	static bool moveLeft(class Game &);
 
 public:
-	static int move(class Game &, int);
+	static bool move(class Game &, int);
 };
 
 #endif //INC_2048GAME_MOVEHANDLER_H

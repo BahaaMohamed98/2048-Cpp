@@ -6,7 +6,7 @@ void GameTime::start() {
 	startTime = std::chrono::steady_clock::now();
 }
 
-void GameTime::end() {
+void GameTime::stop() {
 	endTime = std::chrono::steady_clock::now();
 	duration = std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime);
 }

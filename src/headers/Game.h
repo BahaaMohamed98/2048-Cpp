@@ -17,7 +17,7 @@ private:
 	bool WIN;
 	int score;
 	int moveCounter;
-	GameTime time;
+	GameTime gameTime;
 public:
 	Game();
 
@@ -29,11 +29,11 @@ public:
 
 	void printSeparator() const;
 
-	void addBlock(int max = 1);
+	void addTile(int max = 1);
 
 	bool checkGameOver();
 
-	void start();
+	void run();
 
 	friend class MoveHandler;
 };

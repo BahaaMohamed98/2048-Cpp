@@ -41,7 +41,7 @@ bool MoveHandler::moveDown(Game &game) {
 			else if (game.grid[i + 1][j] == game.grid[i][j]) {
 				game.grid[i + 1][j] <<= 1, game.grid[i][j] = 0;
 				moved = true;
-				game.score += game.grid[i][j];
+				game.score += game.grid[i + 1][j];
 			}
 		}
 	}
@@ -86,14 +86,14 @@ bool MoveHandler::moveLeft(Game &game) {
 			else if (gridRow[j] == gridRow[j - 1]) {
 				gridRow[j - 1] <<= 1, gridRow[j] = 0;
 				moved = true;
-				game.score += gridRow[j];
+				game.score += gridRow[j - 1];
 			}
 		}
 	}
 	return moved;
 }
 
-int MoveHandler::move(Game &game, int keycode) {
+bool MoveHandler::move(Game &game, int keycode) {
 	switch (keycode) {
 		case Keycode::UP:
 			return moveUp(game);
@@ -104,7 +104,7 @@ int MoveHandler::move(Game &game, int keycode) {
 		case Keycode::LEFT:
 			return moveLeft(game);
 		default:
-			return Keycode::INVALID_INPUT;
+			throw std::exception();
 	}
 }
 

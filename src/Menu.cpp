@@ -12,19 +12,24 @@ void Menu::printMenu() {
 }
 
 void Menu::getInput() {
-	switch ((char) getCharInput()) {
-		case '1':
-			game.start();
-			miniMenu();
-			break;
-		case '2':
-			PrintInstructions();
-			break;
-		case Keycode::ESC:
-			exit(0);
-		default:
-			cout << "Invalid choice\n";
-			getInput();
+	bool firstInvalid = true;
+	while (true) {
+		switch ((char) getCharInput()) {
+			case '1':
+				game.run();
+				miniMenu();
+				return;
+			case '2':
+				PrintInstructions();
+				return;
+			case Keycode::ESC:
+				exit(0);
+			default:
+				if (!firstInvalid)
+					continue;
+				cout << "\nInvalid choice\n";
+				firstInvalid = false;
+		}
 	}
 }
 
